@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WeatherApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <style>
+            body{
+                height:{{ height }};
+             }
+            .hero-body{
+                padding: 1rem 0rem;
+            }
+        .box{
+            margin:10px;
+            background-color:rgb(49, 58, 58);
+        }
+        .button{
+            background-color:#E3AE57;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body style="background-image: url('https://images.pexels.com/photos/1154510/pexels-photo-1154510.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');">
+    <section class="hero is-dark">
+        <div class="hero-body">
+            <div class="container">
+                    <span style="position: absolute;right: 0px;width: 300px;"><i style="font-size:2rem;padding: 15px;position:relative;top:5px;" class="fas fa-map-marker-alt"></i>Current Location : {{ city }}</span>
+                    <img src="https://www.freepngimg.com/thumb/weather/23793-9-weather-photos.png" alt="Image" style="width:100px;height:100px; float:left;">
+                <h1 class="title" style="color:#DC3D24; font-size:44px;">
+                        <a href="{% url 'index' %}"> Weather</a>
+                    <span class="subtitle" style="color:#FFFFFF; font-size:15px;"><i>When snow falls, nature listens!</i></span>
+                </h1>
+                
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">    
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                            </div>       
+                        </div> 
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    {% for city_weather in loc_data %}
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title" style="color:#DC3D24;">{{ city_weather.city }}</span>
+                                        <br>
+                                        <span class="subtitle" style="color:#E3AE57;">{{ city_weather.temperature }}° C</span>
+                                        <br> <span style="color:#E3AE57;"> Cloudiness: {{ city_weather.cloud }} % cloudy </span>
+                                        
+                                        <br> <span style="color:#E3AE57;"> Wind Speed: {{ city_weather.windspeed }} meter/sec </span>
+                                        <br> <span style="color:#E3AE57;"> {{ city_weather.description }} </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <h1 class="title" style="text-align:center; color:#DC3D24; font-size:85px;">
+        Weather Forecasting
+    </h1>
+
+
+    <section class="section">
+        <div class="">
+            <div class="">
+                <div class="" style="display: flex;justify-content: center;flex-wrap: wrap;">
+{% for forecast in loc_forc_data %}
+                
+<div class="box">
+    <article class="media">
+        <div class="media-left">
+            <figure class="image is-50x50">
+                <img src="http://openweathermap.org/img/w/{{ forecast.icon }}.png" alt="Image">
+            </figure>
+        </div>
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <span class="title" style="color:#DC3D24;">{{ forecast.city }}</span>
+                    <br>
+                    <br> <span class="subtitle" style="color:#E3AE57;"> {{ forecast.date }} </span><br>
+                    <span class="subtitle" style="color:#E3AE57;">{{ forecast.tem }}° C</span> 
+                    <br> <span style="color:#E3AE57;"> Cloudiness: {{ forecast.cloudns }} % cloudy </span>
+                    <br> <span style="color:#E3AE57;"> Wind Speed: {{ forecast.wind }} meter/sec </span>
+                    <br> <span style="color:#E3AE57;"> {{ forecast.descript }} </span>
+                </p>
+            </div>
+        </div>
+       
+    </article>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+</section> 
+
+
+        
+</body>
+
+</html>
